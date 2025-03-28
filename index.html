@@ -89,7 +89,6 @@
         }
 
         .fallback-message {
-            display: none;
             text-align: center;
             color: #e74c3c;
             padding: 20px;
@@ -150,9 +149,6 @@
         <div class="section" id="overview">
             <h2>Overview 🌟</h2>
             <p>Welcome to the NBA Data Analytics Hub! Slam dunk into our interactive Tableau dashboard and explore stats like never before! 🏀✨😎</p>
-            <p>A data file using CHAT GPT that displays a lot of data from the last 10 years about the NBA American Basketball League.
-Which shows all the teams in the league, from which city and region (West, East), main sponsor and budget level.
-Many numerical data such as the number of assists, rebounds, points for losses and wins, appearances in the playoffs and final series and championships and many other numerical data.</p>
         </div>
 
         <div class="section" id="tableau">
@@ -160,12 +156,12 @@ Many numerical data such as the number of assists, rebounds, points for losses a
             <p>Check out our awesome NBA dashboard below! From points to rebounds, it’s all here—ready to hoop into action? 🏀🚀</p>
             <div class="tableau-container" id="tableau-embed">
                 <iframe 
-                    src="https://public.tableau.com/views/NBA_17425544849980/Dashboard1?:language=en-US&:embed=y&:display_count=n&:origin=viz_share_link&:showVizHome=n&:tabs=n&:toolbar=n&:showShareOptions=n" 
+                    src="https://public.tableau.com/views/NBA_17425544849980/Dashboard1?:language=en-US&:embed=y&:display_count=n&:origin=viz_share_link&:showVizHome=no&:tabs=no&:toolbar=no&:showShareOptions=no&:mobile=yes" 
                     allowfullscreen>
                 </iframe>
-                <div class="fallback-message" id="fallback">
-                    <p>Oops! The Tableau dashboard couldn’t load. 😢 Please <a href="https://public.tableau.com/views/NBA_17425544849980/Dashboard1" target="_blank">view it directly on Tableau Public</a> or check your dashboard settings! 🛠️</p>
-                </div>
+            </div>
+            <div class="fallback-message" id="fallback">
+                <p>Oops! The Tableau dashboard couldn’t load. 😢 Please <a href="https://public.tableau.com/views/NBA_17425544849980/Dashboard1" target="_blank">view it directly on Tableau Public</a>! 🏀 Alternatively, try hosting this site on a different platform like Netlify if GitHub Pages is blocking it.</p>
             </div>
         </div>
 
@@ -202,13 +198,23 @@ Many numerical data such as the number of assists, rebounds, points for losses a
             const iframe = document.querySelector('#tableau-embed iframe');
             const fallback = document.getElementById('fallback');
             
+            // Hide fallback initially
+            fallback.style.display = 'none';
+
+            // Show fallback if iframe fails to load
             iframe.onerror = function() {
                 iframe.style.display = 'none';
                 fallback.style.display = 'block';
             };
 
+            // Check if iframe loaded successfully
             iframe.onload = function() {
-                if (!iframe.contentWindow.document.body) {
+                try {
+                    if (!iframe.contentWindow.document.body || iframe.contentWindow.document.body.innerHTML === "") {
+                        iframe.style.display = 'none';
+                        fallback.style.display = 'block';
+                    }
+                } catch (e) {
                     iframe.style.display = 'none';
                     fallback.style.display = 'block';
                 }
