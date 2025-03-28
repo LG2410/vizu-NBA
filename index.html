@@ -150,6 +150,9 @@
         <div class="section" id="overview">
             <h2>Overview 🌟</h2>
             <p>Welcome to the NBA Data Analytics Hub! Slam dunk into our interactive Tableau dashboard and explore stats like never before! 🏀✨😎</p>
+            <p>A data file using CHAT GPT that displays a lot of data from the last 10 years about the NBA American Basketball League.
+Which shows all the teams in the league, from which city and region (West, East), main sponsor and budget level.
+Many numerical data such as the number of assists, rebounds, points for losses and wins, appearances in the playoffs and final series and championships and many other numerical data.</p>
         </div>
 
         <div class="section" id="tableau">
@@ -195,7 +198,6 @@
     </div>
 
     <script>
-        // Check if Tableau iframe loads, show fallback if it fails
         window.onload = function() {
             const iframe = document.querySelector('#tableau-embed iframe');
             const fallback = document.getElementById('fallback');
@@ -205,10 +207,16 @@
                 fallback.style.display = 'block';
             };
 
-            // Start stat animations
-            animateCount('team-count', 30, 2000);     // 30 NBA teams
-            animateCount('year-count', 10, 2000);     // 10 years of data
-            animateCount('champion-count', 7, 2000);  // 7 unique championship teams
+            iframe.onload = function() {
+                if (!iframe.contentWindow.document.body) {
+                    iframe.style.display = 'none';
+                    fallback.style.display = 'block';
+                }
+            };
+
+            animateCount('team-count', 30, 2000);
+            animateCount('year-count', 10, 2000);
+            animateCount('champion-count', 7, 2000);
         };
 
         function animateCount(elementId, target, duration) {
