@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Data Analytics Hub 📊✨</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            animation: slideIn 1s ease-in;
+        }
+
+        h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 2.8em;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #6e8efb;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        nav a:hover {
+            color: #a777e3;
+            transform: scale(1.1);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #6e8efb;
+            padding-bottom: 12px;
+            font-size: 1.8em;
+        }
+
+        .tableau-container {
+            position: relative;
+            padding-bottom: 75%;
+            height: 0;
+            overflow: hidden;
+            border: 2px solid #6e8efb;
+            border-radius: 10px;
+        }
+
+        .tableau-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #6e8efb, #a777e3);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NBA Data Analytics Hub 🏀📈🌟</h1>
+            <nav>
+                <a href="#overview">Overview 🌍</a>
+                <a href="#tableau">Insights 📊</a>
+                <a href="#stats">Stats 🎯</a>
+                <a href="#contact">Contact 📩</a>
+            </nav>
+        </header>
+
+        <div class="section" id="overview">
+            <h2>Overview 🌟</h2>
+            <p>Welcome to the NBA Data Analytics Hub! Slam dunk into our interactive Tableau dashboard and explore stats like never before! 🏀✨😎</p>
+        </div>
+
+        <div class="section" id="tableau">
+            <h2>NBA Insights 📈🔍</h2>
+            <p>Check out our awesome NBA dashboard below! From points to rebounds, it’s all here—ready to hoop into action? 🏀🚀</p>
+            <div class="tableau-container">
+                <iframe 
+                    src="https://public.tableau.com/views/NBA_17425544849980/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link&:embed=y&:showVizRecommendation=n&:toolbar=n" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="section" id="stats">
+            <h2>Quick Stats 🎯✨</h2>
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card">
+                    <h3>Teams 🏀</h3>
+                    <p id="team-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Years 📅</h3>
+                    <p id="year-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Champions 🏆</h3>
+                    <p id="champion-count">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact Us 📬😊</h2>
+            <p>Got questions or NBA hot takes? Hit us up at <a href="mailto:info@nbadatahub.com">info@nbadatahub.com</a>! 💬</p>
+        </div>
+
+        <footer>
+            <p>© 2025 NBA Data Analytics Hub | Built with ❤️, 🏀, and a dash of 📊✨</p>
+        </footer>
+    </div>
+
+    <script>
+        function animateCount(elementId, target, duration) {
+            let start = 0;
+            const element = document.getElementById(elementId);
+            const increment = target / (duration / 16);
+            
+            function updateCount() {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString() + " 🎉";
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                    requestAnimationFrame(updateCount);
+                }
+            }
+            
+            requestAnimationFrame(updateCount);
+        }
+
+        window.onload = function() {
+            animateCount('team-count', 30, 2000);     // 30 NBA teams
+            animateCount('year-count', 10, 2000);     // 10 years of data
+            animateCount('champion-count', 7, 2000);  // 7 unique championship teams in last 10 years
+        }
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
